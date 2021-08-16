@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Question index{% endblock %}
+
+{% block body %}
+    <h1>Question index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>IdCategorie</th>
+                <th>Question</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <form action="" method="post">
+
+        {% for question in questions %}
+                <h3>{{ question.question }}</h3>
+                    <a href="{{ path('questions_show', {'id': question.id}) }}">show</a>
+                    <a href="{{ path('questions_edit', {'id': question.id}) }}">edit</a>
+            {% for reponse in question.getReponse() %}
+                        <input type="radio" id="scale" name"scale">
+                        <label for="scales">{{ reponse.reponse }}</label></br>
+        {% else %}
+        
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+</form>
+    <a href="{{ path('questions_new') }}">Create new</a>
+{% endblock %}
